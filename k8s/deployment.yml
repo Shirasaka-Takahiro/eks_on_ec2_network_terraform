@@ -1,0 +1,27 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: example-com
+  namespace: example-com
+spec:
+  selector:
+    matchLabels:
+      app: example-com
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: example-com
+    spec:
+      containers:
+      - name: nginx
+        image: example-com-k8s-nginx:latest
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 80
+      - name: php-fpm
+        image: example-com-k8s-php-fpm:latest
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 9000
