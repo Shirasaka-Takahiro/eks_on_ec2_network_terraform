@@ -109,7 +109,6 @@ module "eks_node_launch_template" {
   source = "../../module/eks_node_launch_template"
 
   general_config          = var.general_config
-  #node_group_ec2_image_id = var.node_group_ec2_image_id
   key_pair_id             = module.ec2.key_pair.id
   node_group_volume_size  = var.node_group_volume_size
   node_group_volume_type  = var.node_group_volume_type

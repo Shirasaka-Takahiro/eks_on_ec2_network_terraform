@@ -3,7 +3,6 @@ resource "aws_launch_template" "default" {
   name                   = "${var.general_config["project"]}-${var.general_config["env"]}-eks-node-template"
   update_default_version = false
 
-  #image_id = var.node_group_ec2_image_id
   key_name = var.key_pair_id
 
   block_device_mappings {
