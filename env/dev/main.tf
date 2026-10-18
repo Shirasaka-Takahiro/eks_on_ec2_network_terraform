@@ -81,11 +81,13 @@ module "eks_cluster" {
 module "eks_addon" {
   source = "../../module/eks_addon"
 
-  general_config = var.general_config
+  general_config   = var.general_config
+  eks_cluster_name = module.eks_cluster.eks_cluster_name
   eks_addon_name = [
     "coredns",
     "kube-proxy",
-    "vpc-cni"
+    "vpc-cni",
+    "eks-pod-identity-agent"
   ]
   eks_node_group_name = module.eks_node_group.eks_node_group_name
 }
@@ -94,6 +96,7 @@ module "eks_node_group" {
   source = "../../module/eks_node_group"
 
   general_config                           = var.general_config
+  eks_cluster_name                         = module.eks_cluster.eks_cluster_name
   private_subnet_ids                       = module.network.private_subnet_ids
   node_group_exec_role                     = module.iam_eks_node_group_exec.iam_role_arn
   node_group_desired_size                  = var.node_group_desired_size
@@ -108,11 +111,11 @@ module "eks_node_group" {
 module "eks_node_launch_template" {
   source = "../../module/eks_node_launch_template"
 
-  general_config          = var.general_config
-  key_pair_id             = module.ec2.key_pair.id
-  node_group_volume_size  = var.node_group_volume_size
-  node_group_volume_type  = var.node_group_volume_type
-  internal_sg_id          = module.internal_sg.security_group_id
+  general_config         = var.general_config
+  key_pair_id            = module.ec2.key_pair.id
+  node_group_volume_size = var.node_group_volume_size
+  node_group_volume_type = var.node_group_volume_type
+  internal_sg_id         = module.internal_sg.security_group_id
 }
 
 

@@ -1,5 +1,5 @@
 resource "aws_eks_node_group" "default" {
-  cluster_name    = "${var.general_config["project"]}-${var.general_config["env"]}-cluster"
+  cluster_name    = var.eks_cluster_name
   node_group_name = "${var.general_config["project"]}-${var.general_config["env"]}-node-group"
   node_role_arn   = var.node_group_exec_role
   subnet_ids      = var.private_subnet_ids
@@ -23,6 +23,8 @@ resource "aws_eks_node_group" "default" {
   lifecycle {
     #ignore_changes = [scaling_config[0].desired_size]
   }
+
+  depends_on = [var.eks_cluster_name]
 
 
 }

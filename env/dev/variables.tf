@@ -205,14 +205,6 @@ variable "node_group_max_unavailable" {
   default     = 1
 }
 
-/*
-variable "node_group_ec2_image_id" {
-  description = "Node group image ID of ec2"
-  type        = string
-  default     = "ami-01d078c099c7f1261"
-}
-*/
-
 variable "node_group_ami_type" {
   description = "Node group ami type"
   type        = string

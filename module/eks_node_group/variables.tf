@@ -1,6 +1,7 @@
 variable "general_config" {
   type = map(any)
 }
+variable "eks_cluster_name" {}
 variable "node_group_exec_role" {}
 variable "private_subnet_ids" {}
 variable "node_group_desired_size" {}
